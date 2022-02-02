@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 		@Before("com.obeid.aopdemo.aspect.AopExpression.forDaoPackageExeptGetterSetter()")
 		public void logToCoud() {
 			
-			System.out.println("\n log to cloud @Before excuting!");
+			System.out.println("\n>>>>>>>>>>>>>>>>>>>>>>>>> logToCoud @Before excuting!");
 		}
 
 }

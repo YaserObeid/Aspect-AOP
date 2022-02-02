@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.obeid.aopdemo.dao.AccountDAO;
-import com.obeid.aopdemo.dao.MembershipDAO;
 
 public class AfterThrowingApp {
 
@@ -21,16 +20,19 @@ public class AfterThrowingApp {
 		
 		// simulate an exception
 		
-		boolean someThingWrong = true;
+		List<Account> accounts = null;
 		try {
-			List<Account> accounts = accountDAO.findAccounts(someThingWrong);
-			System.out.println("\nStart AfteThrowinggApp: -----------------------");
-			System.out.println(accounts);
-			System.out.println("End AfteThrowinggApp  : -----------------------\n");
+			boolean someThingWrong = true;
+			
+			accounts = accountDAO.findAccounts(someThingWrong);
+			
 			
 		} catch (Exception e) {
 			System.out.println("Exception: " + e);
 		}
+		System.out.println("\nStart App: -----------------------");
+		System.out.println(accounts);
+		System.out.println("End App  : -----------------------\n");
 		
 		
 		

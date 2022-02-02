@@ -18,6 +18,13 @@ public class MainDemoApp {
 		
 		AccountDAO accountDAO = context.getBean("accountDAO", AccountDAO.class);
 		
+		// call getter & setter
+		accountDAO.setName("name");
+		accountDAO.setServiceCode("code");
+		
+		String name = accountDAO.getName();
+		String code = accountDAO.getServiceCode();
+		
 		// call business methods
 		Account account = new Account();
 		accountDAO.addAccount(account, true);

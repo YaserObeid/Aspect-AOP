@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.obeid.aopdemo.dao.AccountDAO;
-import com.obeid.aopdemo.dao.MembershipDAO;
 
-public class AfterReturningApp {
+public class AfterThrowingApp {
 
 	public static void main(String[] args) {
 		
@@ -19,13 +18,24 @@ public class AfterReturningApp {
 		// create beans from AddaccountDAO
 		AccountDAO accountDAO = context.getBean("accountDAO", AccountDAO.class);
 		
-		List<Account> accounts = accountDAO.findAccounts(false);
-		/**
-		 * here after_returning is called
-		 */
+		// simulate an exception
+		
+		List<Account> accounts = null;
+		try {
+			boolean someThingWrong = true;
+			
+			accounts = accountDAO.findAccounts(someThingWrong);
+			
+			
+		} catch (Exception e) {
+			System.out.println("Exception: " + e);
+		}
 		System.out.println("\nStart App: -----------------------");
 		System.out.println(accounts);
 		System.out.println("End App  : -----------------------\n");
+		
+		
+		
 		
 		
 		

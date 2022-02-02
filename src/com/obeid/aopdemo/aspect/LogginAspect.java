@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -65,7 +66,7 @@ import com.obeid.aopdemo.Account;
 		 * you can modify the return data before the caller receive it !!!	
 		 */
 		@AfterReturning(
-				pointcut = "execution(* com.obeid.aopdemo.dao.AccountDAO.findAccounts())",
+				pointcut = "execution(* com.obeid.aopdemo.dao.AccountDAO.findAccounts(..))",
 				returning = "result"
 				)
 		public void afterreturningFindAccounts(
@@ -74,16 +75,40 @@ import com.obeid.aopdemo.Account;
 				) {
 			// get the method be advised on
 			String method = joinPoint.getSignature().toLongString();
-			System.out.println("\n<<<<<<<<<< @Afterreturning on: "+ method);
-			System.out.println("<<<<<<<<<< @Afterreturning result: "+ result);
+			System.out.println("\n<<<<<<<<<< @AfterReturning on: "+ method);
+			System.out.println("<<<<<<<<<< @AfterReturning result: "+ result);
 			
 			
 			// let's post_process the data : convert name to Upper case
 			for(Account account: result) {
 				account.setName(account.getName().toUpperCase());
 			}
-			System.out.println("<<<<<<<<<< @Afterreturning convert name to upper");
-			System.out.println("<<<<<<<<<< @Afterreturning end: ================");
+			System.out.println("<<<<<<<<<< @AfterReturning convert name to upper");
+			System.out.println("<<<<<<<<<< @AfterReturning end: ================");
+			
+			
+		}
+		
+		/**
+		 * AfterThrowing advice is executed if 
+		 * an exception is thrown
+		 * return an exception object
+		 * the exception go on normal
+		 * it doesn't handle the exception
+		 */
+		@AfterThrowing(
+				pointcut = "execution(* com.obeid.aopdemo.dao.AccountDAO.findAccounts(..))",
+				throwing = "ex"
+				)
+		public void afterThrowingAdviceFindAccounts(
+				JoinPoint joinPoint,
+				Throwable ex
+				) {
+			// get the method be advised on
+				String method = joinPoint.getSignature().toLongString();
+				System.out.println("\n<<<<<<<<<< @AfterThrowing on: "+ method);
+				System.out.println("<<<<<<<<<< @Afterreturning ex : "+ ex);
+				System.out.println("<<<<<<<<<< @Afterreturning End  ");
 			
 			
 		}

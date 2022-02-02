@@ -27,12 +27,15 @@ public class MainDemoApp {
 		
 		// call business methods
 		Account account = new Account();
+		account.setName("Yaser Obeid");
+		account.setLevel("Platinum");
 		accountDAO.addAccount(account, true);
 		accountDAO.anotherWork();
 		
 		
 		// get beans from NembershipDAO
-		MembershipDAO membershipDAO = context.getBean("membershipDAO", MembershipDAO.class);
+		MembershipDAO membershipDAO = 
+				context.getBean("membershipDAO", MembershipDAO.class);
 		
 		// call business methods
 		membershipDAO.addANewMember(20);

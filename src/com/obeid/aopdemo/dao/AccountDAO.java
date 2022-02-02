@@ -1,5 +1,8 @@
 package com.obeid.aopdemo.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.obeid.aopdemo.Account;
@@ -9,6 +12,24 @@ public class AccountDAO {
 	
 	private String name;
 	private String serviceCode;
+	
+	// method return accounts
+	public List<Account> findAccounts() {
+		List<Account> accounts = new ArrayList<>();
+		
+		Account account1 = new Account("Obeid", "Platinum");
+		Account account2 = new Account("Homsi", "Golden");
+		Account account3 = new Account("Morad", "Silver");
+		Account account4 = new Account("Tomas", "Golden");
+		
+		accounts.add(account1);
+		accounts.add(account2);
+		accounts.add(account3);
+		accounts.add(account4);
+		
+		return accounts;
+		
+	}
 	
 	// getter - setter
 	

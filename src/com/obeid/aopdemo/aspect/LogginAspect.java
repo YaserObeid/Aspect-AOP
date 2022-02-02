@@ -28,7 +28,7 @@ import com.obeid.aopdemo.Account;
 		// 1- pass joinpoint_instance as parameter
 		public void beforeAddAcount(JoinPoint joinPoint) {
 			
-			System.out.println("\n loggin @Before excuting!");
+			System.out.println("\n>>>>>>>>>>>>>>>>>>>> beforeAddAcount @Before excuting!");
 			
 			
 			// display method signature using the passed joinpoint
@@ -62,7 +62,7 @@ import com.obeid.aopdemo.Account;
 		 * advice parameter:
 		 * 		JoinPoint_instance,
 		 * 		List<object> (named the same name of returning in annotation)
-		 * 		
+		 * you can modify the return data before the caller receive it !!!	
 		 */
 		@AfterReturning(
 				pointcut = "execution(* com.obeid.aopdemo.dao.AccountDAO.findAccounts())",
@@ -76,6 +76,13 @@ import com.obeid.aopdemo.Account;
 			String method = joinPoint.getSignature().toLongString();
 			System.out.println("\n<<<<<<<<<< @Afterreturning on: "+ method);
 			System.out.println("<<<<<<<<<< @Afterreturning result: "+ result);
+			
+			
+			// let's post_process the data : convert name to Upper case
+			for(Account account: result) {
+				account.setName(account.getName().toUpperCase());
+			}
+			System.out.println("<<<<<<<<<< @Afterreturning convert name to upper");
 			System.out.println("<<<<<<<<<< @Afterreturning end: ================");
 			
 			

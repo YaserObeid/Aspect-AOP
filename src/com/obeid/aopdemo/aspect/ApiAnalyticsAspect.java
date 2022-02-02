@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 		@Before("com.obeid.aopdemo.aspect.AopExpression.forDaoPackageExeptGetterSetter()")
 		public void performApiAnalys() {
 			
-			System.out.println("\n analys perform @Before excuting!");
+			System.out.println("\n>>>>>>>>>>>>>>>>>>> performApiAnalys @Before excuting!");
 		}
 
 }

@@ -24,4 +24,12 @@ public class ExpectationService {
 		
 	}
 
+	public String getTrafficExpection(boolean wrong) {
+		
+		if(wrong)
+			throw new RuntimeException("there is an accident on the highway!!!");
+		
+		return getTrafficExpection();
+	}
+
 }

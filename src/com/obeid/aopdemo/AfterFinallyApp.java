@@ -1,12 +1,16 @@
 package com.obeid.aopdemo;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.obeid.aopdemo.dao.AccountDAO;
 
 public class AfterFinallyApp {
+	
+	private static Logger myLogger = 
+			Logger.getLogger(AfterFinallyApp.class.getName());
 
 	public static void main(String[] args) {
 		
@@ -26,13 +30,13 @@ public class AfterFinallyApp {
 			
 			accounts = accountDAO.findAccounts(someThingWrong);
 			
-			System.out.println("\nStart App: -----------------------");
-			System.out.println(accounts);
-			System.out.println("End App  : -----------------------\n");
+			myLogger.info("\nStart App: -----------------------");
+			myLogger.info(accounts.toString());
+			myLogger.info("End App  : -----------------------\n");
 			
 			
 		} catch (Exception e) {
-			System.out.println("Exception: " + e);
+			myLogger.info("Exception: " + e);
 		}
 		
 		

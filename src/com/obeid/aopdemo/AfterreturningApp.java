@@ -1,13 +1,16 @@
 package com.obeid.aopdemo;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.obeid.aopdemo.dao.AccountDAO;
-import com.obeid.aopdemo.dao.MembershipDAO;
 
 public class AfterReturningApp {
+	
+	private static Logger myLogger = 
+			Logger.getLogger(AfterReturningApp.class.getName());
 
 	public static void main(String[] args) {
 		
@@ -23,9 +26,9 @@ public class AfterReturningApp {
 		/**
 		 * here after_returning is called
 		 */
-		System.out.println("\nStart App: -----------------------");
-		System.out.println(accounts);
-		System.out.println("End App  : -----------------------\n");
+		myLogger.info("\nStart App: -----------------------");
+		myLogger.info(accounts.toString());
+		myLogger.info("End App  : -----------------------\n");
 		
 		
 		

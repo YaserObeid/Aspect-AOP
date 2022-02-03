@@ -1,12 +1,18 @@
 package com.obeid.aopdemo;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.obeid.aopdemo.dao.AccountDAO;
 
 public class AfterThrowingApp {
+	
+	private static Logger myLogger = 
+			Logger.getLogger(AfterThrowingApp.class.getName());
+	
+	
 
 	public static void main(String[] args) {
 		
@@ -28,11 +34,11 @@ public class AfterThrowingApp {
 			
 			
 		} catch (Exception e) {
-			System.out.println("Exception: " + e);
+			myLogger.info("Exception: " + e);
 		}
-		System.out.println("\nStart App: -----------------------");
-		System.out.println(accounts);
-		System.out.println("End App  : -----------------------\n");
+		myLogger.info("\nStart App: -----------------------");
+		myLogger.info(accounts.toString());
+		myLogger.info("End App  : -----------------------\n");
 		
 		
 		

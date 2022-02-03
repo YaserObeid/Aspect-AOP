@@ -1,7 +1,5 @@
 package com.obeid.aopdemo;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Account {
 	

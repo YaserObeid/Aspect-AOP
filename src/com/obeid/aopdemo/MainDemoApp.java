@@ -1,11 +1,16 @@
 package com.obeid.aopdemo;
 
+import java.util.logging.Logger;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.obeid.aopdemo.dao.AccountDAO;
 import com.obeid.aopdemo.dao.MembershipDAO;
 
 public class MainDemoApp {
+	
+	private static Logger myLogger = 
+			Logger.getLogger(ExceptionHandlerApp.class.getName());
 
 	public static void main(String[] args) {
 		

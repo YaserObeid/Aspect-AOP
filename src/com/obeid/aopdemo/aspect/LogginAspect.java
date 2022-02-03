@@ -5,9 +5,11 @@ package com.obeid.aopdemo.aspect;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.core.annotation.Order;
@@ -122,6 +124,38 @@ import com.obeid.aopdemo.Account;
 			String method = joinPoint.getSignature().toLongString();
 			System.out.println("\n<<<<<<<<<< @After (finally) on: "+ method);
 			System.out.println("<<<<<<<<<< @After (finally) end  ");
+		}
+		
+		
+		
+		/**
+		 * Around Advice execute before & after the target
+		 * pre/post processing
+		 * return an object
+		 * parameter processingJoinpoit
+		 * @throws Throwable 
+		 */
+		
+		// using the around Advice to calculate during processing the target
+		
+		@Around("execution(* com.obeid.aopdemo.service.ExpectationService.getTrafficExpection(..))")
+		public Object aroundAdviceGetTrafficService(ProceedingJoinPoint pjp) throws Throwable {
+			// get the method be advised on
+			String method = pjp.getSignature().toLongString();
+			System.out.println("\n>>>>>>>> @Around  on: "+ method);
+			
+			// pre_prodess
+			Long start = System.currentTimeMillis();
+			// target execute
+			Object result = pjp.proceed();
+			//post_process
+			Long end = System.currentTimeMillis();
+			
+			System.out.println("Duration: "+ (end - start) +" Millis");
+			
+			System.out.println("<<<<<<<	<< @Around (finally) end\n  ");
+			return result;
+			
 		}
 
 }

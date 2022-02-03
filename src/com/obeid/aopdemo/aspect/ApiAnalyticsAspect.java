@@ -1,5 +1,6 @@
 package com.obeid.aopdemo.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.core.annotation.Order;
@@ -20,9 +21,10 @@ import org.springframework.stereotype.Component;
 		// will be applied on all methods exclude getter / setter
 		// com.obeid.aopdemo.aspect.AopExpression: qualified name of expression source
 		@Before("com.obeid.aopdemo.aspect.AopExpression.forDaoPackageExeptGetterSetter()")
-		public void performApiAnalys() {
-			
-			System.out.println("\n>>>>>>>>>>>>>>>>>>> performApiAnalys @Before excuting!");
+		public void performApiAnalys(JoinPoint joinPoint) {
+			String method = joinPoint.getSignature().toLongString();
+			System.out.println("\n>>>>>>>>>> @Before (1- API Analys) on: "+ method);
+			System.out.println("<<<<<<<<<< @Before end  ");
 		}
 
 }

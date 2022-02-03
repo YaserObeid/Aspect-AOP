@@ -145,14 +145,37 @@ import com.obeid.aopdemo.Account;
 		
 		@Around("execution(* com.obeid.aopdemo.service.ExpectationService.getTrafficExpection(..))")
 		public Object aroundAdviceGetTrafficService(ProceedingJoinPoint pjp) throws Throwable {
+			
 			// get the method be advised on
 			String method = pjp.getSignature().toLongString();
 			myLogger.info("\n>>>>>>>> @Around  on: "+ method);
 			
 			// pre_prodess
 			Long start = System.currentTimeMillis();
+			
+			/**
+			 * exception handling
+			 * the main pp will never know about the exception
+			 */
+			
 			// target execute
-			Object result = pjp.proceed();
+			Object result = null;
+			
+			try {
+				
+				result = pjp.proceed();
+				
+			} catch (Throwable e) {
+				
+				// log the exception
+				myLogger.warning(e.getMessage()); 
+				
+				// send custom message to the app
+				result =" NO Warries! We comming to help you :)";
+				
+			}
+			
+			
 			//post_process
 			Long end = System.currentTimeMillis();
 			

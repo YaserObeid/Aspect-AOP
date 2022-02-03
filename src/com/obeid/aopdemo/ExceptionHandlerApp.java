@@ -31,12 +31,9 @@ public class ExceptionHandlerApp {
 		
 		myLogger.info("Calling Service ..");
 		
-		try {
-			myLogger.info(expectationService.getTrafficExpection(wrong));
-		} catch (Throwable e) {
-			
-			e.printStackTrace();
-		}
+		
+		myLogger.info(expectationService.getTrafficExpection(wrong));
+		
 		
 		myLogger.info("Ending Service :)");
 		

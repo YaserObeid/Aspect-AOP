@@ -1,10 +1,22 @@
 package com.obeid.aopdemo;
 
 
+//import java.util.logging.Logger;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import com.obeid.aopdemo.service.ExpectationService;
 
-public class ArroundApp {
+public class AroundApp {
+	/**
+	 * Change the OutPut Stream
+	 * 
+	 * define the logger of this class
+	 * it is used as Spring output
+	 * Sys.out: use the system out put
+	 */
+	//private static Logger myLogger = Logger.getLogger(ArroundApp.class.getName());
+	// then you must replace System.out.println with myLogger.info
+	
 
 	public static void main(String[] args) {
 		

@@ -3,6 +3,7 @@ package com.obeid.aopdemo.aspect;
 
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -22,6 +23,10 @@ import com.obeid.aopdemo.Account;
 		@Component
 		@Order(2)
 		public class LogginAspect {
+			
+			private static Logger myLogger = 
+					Logger.getLogger(LogginAspect.class.getName());
+			
 			/**
 			 * you can access meta data of the target method:
 			 * 
@@ -31,7 +36,7 @@ import com.obeid.aopdemo.Account;
 		// 1- pass joinpoint_instance as parameter
 		public void beforeAddAcount(JoinPoint joinPoint) {
 			String method = joinPoint.getSignature().toLongString();
-			System.out.println("\n>>>>>>>>>> @Before (2- loggin) on: "+ method);
+			myLogger.info("\n>>>>>>>>>> @Before (2- loggin) on: "+ method);
 			
 			// display the method arguments
 			
@@ -39,14 +44,14 @@ import com.obeid.aopdemo.Account;
 			
 			for(Object o : args) {
 				
-				System.out.println("arg: "+ o );
+				myLogger.info("arg: "+ o );
 				if( o instanceof Account) {
 					Account account = (Account) o;
-					System.out.println("accoun name: "+ account.getName());
-					System.out.println("accoun level: "+ account.getLevel());
+					myLogger.info("accoun name: "+ account.getName());
+					myLogger.info("accoun level: "+ account.getLevel());
 				}
 			}
-			System.out.println("<<<<<<<<<< @Before end  ");
+			myLogger.info("<<<<<<<<<< @Before end  ");
 		
 		}
 		
@@ -73,16 +78,16 @@ import com.obeid.aopdemo.Account;
 				) {
 			// get the method be advised on
 			String method = joinPoint.getSignature().toLongString();
-			System.out.println("\n<<<<<<<<<< @AfterReturning on: "+ method);
-			System.out.println("<<<<<<<<<< @AfterReturning result: "+ result);
+			myLogger.info("\n<<<<<<<<<< @AfterReturning on: "+ method);
+			myLogger.info("<<<<<<<<<< @AfterReturning result: "+ result);
 			
 			
 			// let's post_process the data : convert name to Upper case
 			for(Account account: result) {
 				account.setName(account.getName().toUpperCase());
 			}
-			System.out.println("<<<<<<<<<< @AfterReturning convert name to upper");
-			System.out.println("<<<<<<<<<< @AfterReturning end");
+			myLogger.info("<<<<<<<<<< @AfterReturning convert name to upper");
+			myLogger.info("<<<<<<<<<< @AfterReturning end");
 			
 			
 		}
@@ -104,9 +109,9 @@ import com.obeid.aopdemo.Account;
 				) {
 			// get the method be advised on
 				String method = joinPoint.getSignature().toLongString();
-				System.out.println("\n<<<<<<<<<< @AfterThrowing on: "+ method);
-				System.out.println("<<<<<<<<<< @AfterThrowing ex : "+ ex);
-				System.out.println("<<<<<<<<<< @AfterThrowing End  ");
+				myLogger.info("\n<<<<<<<<<< @AfterThrowing on: "+ method);
+				myLogger.info("<<<<<<<<<< @AfterThrowing ex : "+ ex);
+				myLogger.info("<<<<<<<<<< @AfterThrowing End  ");
 			
 			
 		}
@@ -122,8 +127,8 @@ import com.obeid.aopdemo.Account;
 			
 			// get the method be advised on
 			String method = joinPoint.getSignature().toLongString();
-			System.out.println("\n<<<<<<<<<< @After (finally) on: "+ method);
-			System.out.println("<<<<<<<<<< @After (finally) end  ");
+			myLogger.info("\n<<<<<<<<<< @After (finally) on: "+ method);
+			myLogger.info("<<<<<<<<<< @After (finally) end  ");
 		}
 		
 		
@@ -142,7 +147,7 @@ import com.obeid.aopdemo.Account;
 		public Object aroundAdviceGetTrafficService(ProceedingJoinPoint pjp) throws Throwable {
 			// get the method be advised on
 			String method = pjp.getSignature().toLongString();
-			System.out.println("\n>>>>>>>> @Around  on: "+ method);
+			myLogger.info("\n>>>>>>>> @Around  on: "+ method);
 			
 			// pre_prodess
 			Long start = System.currentTimeMillis();
@@ -151,9 +156,9 @@ import com.obeid.aopdemo.Account;
 			//post_process
 			Long end = System.currentTimeMillis();
 			
-			System.out.println("Duration: "+ (end - start) +" Millis");
+			myLogger.info("Duration: "+ (end - start) +" Millis");
 			
-			System.out.println("<<<<<<<	<< @Around (finally) end\n  ");
+			myLogger.info("<<<<<<<	<< @Around (finally) end\n  ");
 			return result;
 			
 		}

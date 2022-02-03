@@ -155,7 +155,7 @@ import com.obeid.aopdemo.Account;
 			
 			/**
 			 * exception handling
-			 * the main pp will never know about the exception
+			 * the main app will never know about the exception
 			 */
 			
 			// target execute
@@ -171,7 +171,10 @@ import com.obeid.aopdemo.Account;
 				myLogger.warning(e.getMessage()); 
 				
 				// send custom message to the app
-				result =" NO Warries! We comming to help you :)";
+				//result =" NO Warries! We comming to help you :)";
+				
+				// otherwise you can re_throw_exc
+				throw e;
 				
 			}
 			

@@ -5,11 +5,11 @@ package com.obeid.aopdemo.aspect;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -28,14 +28,8 @@ import com.obeid.aopdemo.Account;
 		@Before("com.obeid.aopdemo.aspect.AopExpression.forDaoPackageExeptGetterSetter()")
 		// 1- pass joinpoint_instance as parameter
 		public void beforeAddAcount(JoinPoint joinPoint) {
-			
-			System.out.println("\n>>>>>>>>>>>>>>>>>>>> beforeAddAcount @Before excuting!");
-			
-			
-			// display method signature using the passed joinpoint
-			MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-			
-			System.out.println("Method signature: "+ methodSignature);
+			String method = joinPoint.getSignature().toLongString();
+			System.out.println("\n>>>>>>>>>> @Before (2- loggin) on: "+ method);
 			
 			// display the method arguments
 			
@@ -50,8 +44,10 @@ import com.obeid.aopdemo.Account;
 					System.out.println("accoun level: "+ account.getLevel());
 				}
 			}
+			System.out.println("<<<<<<<<<< @Before end  ");
 		
 		}
+		
 		
 		/**
 		 * create After_returning advice 
@@ -84,7 +80,7 @@ import com.obeid.aopdemo.Account;
 				account.setName(account.getName().toUpperCase());
 			}
 			System.out.println("<<<<<<<<<< @AfterReturning convert name to upper");
-			System.out.println("<<<<<<<<<< @AfterReturning end: ================");
+			System.out.println("<<<<<<<<<< @AfterReturning end");
 			
 			
 		}
@@ -107,10 +103,25 @@ import com.obeid.aopdemo.Account;
 			// get the method be advised on
 				String method = joinPoint.getSignature().toLongString();
 				System.out.println("\n<<<<<<<<<< @AfterThrowing on: "+ method);
-				System.out.println("<<<<<<<<<< @Afterreturning ex : "+ ex);
-				System.out.println("<<<<<<<<<< @Afterreturning End  ");
+				System.out.println("<<<<<<<<<< @AfterThrowing ex : "+ ex);
+				System.out.println("<<<<<<<<<< @AfterThrowing End  ");
 			
 			
+		}
+		
+		/**
+		 * After advice is executed at any case : fail/ success
+		 * return no values or exception
+		 * it is executed before AfterReturn / AfterThrowing
+		 * 
+		 */
+		@After("execution(* com.obeid.aopdemo.dao.AccountDAO.findAccounts(..))")
+		public void afterFinallyFindAccounts(JoinPoint joinPoint) {
+			
+			// get the method be advised on
+			String method = joinPoint.getSignature().toLongString();
+			System.out.println("\n<<<<<<<<<< @After (finally) on: "+ method);
+			System.out.println("<<<<<<<<<< @After (finally) end  ");
 		}
 
 }

@@ -109,6 +109,19 @@ import com.obeid.aopdemo.Account;
 			
 		}
 		
-		
+		/**
+		 * After advice is executed at any case : fail/ success
+		 * return no values or exception
+		 * it is executed before AfterReturn / AfterThrowing
+		 * 
+		 */
+		@After("execution(* com.obeid.aopdemo.dao.AccountDAO.findAccounts(..))")
+		public void afterFinallyFindAccounts(JoinPoint joinPoint) {
+			
+			// get the method be advised on
+			String method = joinPoint.getSignature().toLongString();
+			System.out.println("\n<<<<<<<<<< @After (finally) on: "+ method);
+			System.out.println("<<<<<<<<<< @After (finally) end  ");
+		}
 
 }

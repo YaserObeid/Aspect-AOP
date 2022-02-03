@@ -24,4 +24,12 @@ public class ExpectationService {
 		
 	}
 
+	public String getTrafficExpection(boolean wrong) throws Throwable {
+		
+		if(wrong)
+			throw new Throwable("there is an accident on the highway!!!");
+		
+		return getTrafficExpection();
+	}
+
 }

@@ -25,9 +25,18 @@ public class ExceptionHandlerApp {
 		ExpectationService expectationService = 
 			context.getBean("expectationService", ExpectationService.class);
 		
+		// simulate exception
+		
+		boolean wrong = true;
+		
 		myLogger.info("Calling Service ..");
 		
-		myLogger.info(expectationService.getTrafficExpection());
+		try {
+			myLogger.info(expectationService.getTrafficExpection(wrong));
+		} catch (Throwable e) {
+			
+			e.printStackTrace();
+		}
 		
 		myLogger.info("Ending Service :)");
 		
